@@ -14,6 +14,7 @@
 		2F4EC846228CB237007275BE /* MealTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4EC845228CB237007275BE /* MealTableViewController.swift */; };
 		2F4EC848228CB294007275BE /* MealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4EC847228CB294007275BE /* MealViewController.swift */; };
 		2F4EC84D228CB40B007275BE /* MealModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F4EC84C228CB40B007275BE /* MealModel.swift */; };
+		2FCD0A55228DA0CB00B896E3 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FCD0A54228DA0CB00B896E3 /* CustomTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2F4EC845228CB237007275BE /* MealTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealTableViewController.swift; sourceTree = "<group>"; };
 		2F4EC847228CB294007275BE /* MealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealViewController.swift; sourceTree = "<group>"; };
 		2F4EC84C228CB40B007275BE /* MealModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealModel.swift; sourceTree = "<group>"; };
+		2FCD0A54228DA0CB00B896E3 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,10 +90,19 @@
 			isa = PBXGroup;
 			children = (
 				2F4EC833228CB101007275BE /* AppDelegate.swift */,
-				2F4EC845228CB237007275BE /* MealTableViewController.swift */,
 				2F4EC847228CB294007275BE /* MealViewController.swift */,
+				2FDF8F0D228EFE2800558C40 /* TableView */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		2FDF8F0D228EFE2800558C40 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				2F4EC845228CB237007275BE /* MealTableViewController.swift */,
+				2FCD0A54228DA0CB00B896E3 /* CustomTableViewCell.swift */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F4EC846228CB237007275BE /* MealTableViewController.swift in Sources */,
+				2FCD0A55228DA0CB00B896E3 /* CustomTableViewCell.swift in Sources */,
 				2F4EC834228CB101007275BE /* AppDelegate.swift in Sources */,
 				2F4EC84D228CB40B007275BE /* MealModel.swift in Sources */,
 				2F4EC848228CB294007275BE /* MealViewController.swift in Sources */,

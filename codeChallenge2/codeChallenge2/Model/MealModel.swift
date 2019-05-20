@@ -8,7 +8,11 @@
 
 import Foundation
 
-struct Meal: Codable {
+struct Meal: Codable, Comparable {
+    
+    static func < (lhs: Meal, rhs: Meal) -> Bool {
+        return lhs.date > rhs.date
+    }
     
     var name: String
     var calories: Int
@@ -23,6 +27,10 @@ struct Meal: Codable {
         guard let codedMeals = try? Data(contentsOf: ArchiveURL) else { return nil }
         let decoder = PropertyListDecoder()
         return try? decoder.decode(Array<Meal>.self, from: codedMeals)
+    }
+    
+    static func loadSampleMeal() -> [Meal] {
+        return [Meal(name: "Sample Meal", calories: 000, date: Date(), rating: 5)]
     }
     
     static func saveToFile(meals: [Meal]) {

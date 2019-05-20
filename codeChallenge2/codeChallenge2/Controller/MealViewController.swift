@@ -13,15 +13,18 @@ class MealViewController: UIViewController {
     //==================================================
     // MARK: - Properties
     //==================================================
+    
+    var meal: Meal?
     var currentDate = Date()
-    let dateFormatter = DateFormatter()
+    var dateFormatter = DateFormatter()
     let formatTemplate = "MMMM dd, yyyy"
     var toggle: Bool = true
-    
     
     //==================================================
     // MARK: - Outlets
     //==================================================
+    
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var datePickerStackView: UIStackView!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -31,6 +34,9 @@ class MealViewController: UIViewController {
     @IBOutlet weak var calorieTextField: UITextField!
     @IBOutlet weak var ratingSlider: UISlider!
     @IBOutlet weak var ratingNumberLabel: UILabel!
+    @IBOutlet weak var warningLabelStackView: UIStackView!
+    @IBOutlet weak var missingNameLabel: UILabel!
+    @IBOutlet weak var missingRatingLabel: UILabel!
     
     
     //==================================================
@@ -43,12 +49,29 @@ class MealViewController: UIViewController {
         dateLabel.text = formatCurrentDate()
         datePickerStackView.isHidden = true
         remainingOutletsStackView.transform = CGAffineTransform(translationX: 0, y: -216)
+        warningLabelStackView.transform = CGAffineTransform(translationX: 0, y: -216)
+        warningLabelStackView.isHidden = true
         
+        if let meal = meal {
+            dateLabel.text = formatMealDate()
+            mealTextField.text = meal.name
+            calorieTextField.text = "\(meal.calories)"
+            ratingNumberLabel.text = "\(meal.rating)"
+        }
     }
     
     //==================================================
     // MARK: - Functions
     //==================================================
+    
+    
+    func formatMealDate() -> String {
+        guard let mealDate = meal?.date else {
+        return formatCurrentDate()
+        }
+        dateFormatter.dateFormat = formatTemplate
+        return dateFormatter.string(from: mealDate)
+    }
     
     func formatCurrentDate() -> String {
         let currentDate = Date()
@@ -61,6 +84,15 @@ class MealViewController: UIViewController {
         dateFormatter.dateFormat = "MMMM dd, yyyy"
         return dateFormatter.string(from: pickerDate)
     }
+    
+    func getDateFromLabel() -> Date {
+        self.dateFormatter.dateFormat = "MMMM dd, yyyy"
+        guard let dateLabelText = dateLabel.text,
+        let date = dateFormatter.date(from: "\(dateLabelText)") else { return Date() }
+        return date
+    }
+    
+    
     
     func collapsePickerStackView() {
         UIView.animate(withDuration: 0.3, animations: {
@@ -81,9 +113,28 @@ class MealViewController: UIViewController {
         }
     }
     
+    func convertCalorieTextToInt() -> Int {
+        guard let calText = calorieTextField.text,
+        let calInt = Int(calText) else { return 0 }
+        return calInt
+        
+    }
+    
+    func convertRatingTextToInt() -> Int {
+        guard let ratingText = ratingNumberLabel.text,
+            let ratingIng = Int(ratingText) else { return 0 }
+        return ratingIng
+    }
+    
+    
     //==================================================
     // MARK: - Actions
     //==================================================
+    
+    
+    @IBAction func editingChanged(_ sender: UITextField) {
+    }
+    
     
     @IBAction func datePickerChanged(_ sender: Any) {
         dateLabel.text = formatPickerDate()
@@ -105,16 +156,24 @@ class MealViewController: UIViewController {
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+       
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    //==================================================
+    // MARK: - Navigation
+    //==================================================
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        guard segue.identifier == "saveUnwind" else { return }
+        
+        let date = getDateFromLabel()
+        guard let name = mealTextField.text else { return }
+        let calories = convertCalorieTextToInt()
+        let rating = convertRatingTextToInt()
+        
+        meal = Meal(name: name, calories: calories, date: date, rating: rating)
+        
+    }
 }
