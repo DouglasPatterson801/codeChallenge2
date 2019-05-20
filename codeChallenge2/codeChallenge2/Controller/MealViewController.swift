@@ -34,9 +34,6 @@ class MealViewController: UIViewController {
     @IBOutlet weak var calorieTextField: UITextField!
     @IBOutlet weak var ratingSlider: UISlider!
     @IBOutlet weak var ratingNumberLabel: UILabel!
-    @IBOutlet weak var warningLabelStackView: UIStackView!
-    @IBOutlet weak var missingNameLabel: UILabel!
-    @IBOutlet weak var missingRatingLabel: UILabel!
     
     
     //==================================================
@@ -49,8 +46,6 @@ class MealViewController: UIViewController {
         dateLabel.text = formatCurrentDate()
         datePickerStackView.isHidden = true
         remainingOutletsStackView.transform = CGAffineTransform(translationX: 0, y: -216)
-        warningLabelStackView.transform = CGAffineTransform(translationX: 0, y: -216)
-        warningLabelStackView.isHidden = true
         
         if let meal = meal {
             dateLabel.text = formatMealDate()
